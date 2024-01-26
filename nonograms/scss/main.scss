@@ -1,0 +1,43 @@
+@import "../node_modules/normalize.css/normalize.css";
+
+$white-color: #f1f2f2;
+$black-color: #28283b;
+$green-color: #d9fe95;
+$grey-color: #c9d0d5;
+$opacity-level: 0.5;
+
+body {
+  height: 100vh;
+  grid-template-rows: 1fr;
+  background-color: $white-color;
+  color: $black-color;
+  font-family: "Inter", sans-serif;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, auto));
+  grid-template-areas: "aside main";
+}
+
+aside {
+  grid-area: aside;
+}
+main {
+  grid-area: main;
+}
+
+h1 {
+  font-family: Inter;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+h2 {
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
