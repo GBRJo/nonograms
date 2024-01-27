@@ -16,8 +16,24 @@ nonogramContainer.className = "nonogram__container";
 nonogramContainer.id = "nonogram__container";
 bodyElement1.appendChild(nonogramContainer);
 
-for (var i = 0; i < 81; i++) {
+for (var i = 0; i < 20; i++) {
+  var nonogramHintCell = document.createElement("div");
+  nonogramHintCell.className = "nonogram__Hint--" + i;
+  nonogramContainer.appendChild(nonogramHintCell);
+
+  var hintNum = document.createElement("p");
+  hintNum.className = "hint__number";
+  hintNum.innerHTML = "1";
+  nonogramHintCell.appendChild(hintNum);
+}
+
+var nonogramHintCell20 = document.createElement("div");
+nonogramHintCell20.className = "nonogram__Hint--" + 20;
+nonogramContainer.appendChild(nonogramHintCell20);
+
+
+for (var i = 0; i < 25; i++) {
   var nonogramCell = document.createElement("div");
-  nonogramCell.className = "nonogram__Cell--" + i;
-  nonogramContainer.appendChild(nonogramCell);
+  nonogramCell.className = "nonogram__cell nonogram__cell--" + i;
+  nonogramHintCell20.appendChild(nonogramCell);
 }
