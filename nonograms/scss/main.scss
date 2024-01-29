@@ -1,48 +1,73 @@
-@import "../node_modules/normalize.css/normalize.css";
-
-$white-color: #f1f2f2;
+$white-color: #f2f2f2;
 $black-color: #484848;
-$grey-color: #C0C4CC;
+$grey-color: #c0c4cc;
 $green-color: #d9fe95;
 
-$opacity-level: 0.5;
+@import "../node_modules/normalize.css/normalize.css";
+@import "./nonogram.scss";
+@import "./menu.scss";
+
+$white-color: #f2f2f2;
+$black-color: #484848;
+$grey-color: #c0c4cc;
+$green-color: #d9fe95;
+
 
 body {
   height: 100vh;
   grid-template-rows: 1fr;
   background-color: $white-color;
-  color: $grey-color;
+  color: $black-color;
   font-family: "Roboto", sans-serif;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, auto));
-  grid-template-areas: "left main right";
+  grid-template-columns: 4fr 2fr;
+  grid-template-areas: "main menu";
 }
 
-left {
-  grid-area: left;
-}
 main {
   grid-area: main;
 }
-right {
-  grid-area: right;
+menu {
+  grid-area: menu;
 }
 
 h1 {
-  font-family: Inter;
+  font-family: Roboto;
   font-size: 48px;
   font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  font-weight: 300;
+  line-height: 41px;
+  letter-spacing: 0.4px;
   margin: 0;
 }
 
 h2 {
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  font-family: Roboto;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+  margin: 0;
+}
+
+h3 {
+font-family: Roboto;
+font-size: 17px;
+font-style: normal;
+font-weight: 500;
+line-height: 22px; /* 129.412% */
+letter-spacing: -0.425px;
+margin: 0;
+}
+
+h4 {
+  font-family: Roboto;
+  color: $grey-color;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -0.225px;
   margin: 0;
 }
 
@@ -63,192 +88,12 @@ p {
   padding-bottom: 40px;
 }
 
-.nonogram__container {
-  width: 432px;
-  height: 432px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(9, [col]48px);
-  grid-template-rows: repeat(9, [row]48px);
-}
-
-.nonogram__Hint--20 {
-  grid-column: col 3 / col 8;
-  grid-row: row 3 / row 8;
-  display: grid;
-  box-shadow: inset 0 0 0 0.8px $black-color;
-  grid-template-columns: repeat(5, [col]48px);
-  grid-template-rows: repeat(5, [row]48px);
-}
-
-.nonogram__cell {
-  box-shadow: inset 0 0 0 0.4px $grey-color;
-}
-
-.nonogram__cell--5 {
-  background-color: $green-color;
-  box-shadow: none;
-}
-
-%hint_up {
-  box-shadow: inset 0.5px 0 0 0 $grey-color;
-  text-align: center;
-  align-content: end;
-  padding: 8px;
-}
-
-.nonogram__Hint--0 {
-  grid-row: row 1 / row 3;
-  grid-column: col 3 / col 4;
-  @extend %hint_up;
-  box-shadow: none;
-}
-
-.nonogram__Hint--1 {
-  grid-row: row 1 / row 3;
-  grid-column: col 4 / col 5;
-  @extend %hint_up;
-}
-
-.nonogram__Hint--2 {
-  grid-row: row 1 / row 3;
-  grid-column: col 5 / col 6;
-  @extend %hint_up;
-}
-
-.nonogram__Hint--3 {
-  grid-row: row 1 / row 3;
-  grid-column: col 6 / col 7;
-  @extend %hint_up;
-}
-
-.nonogram__Hint--4 {
-  grid-row: row 1 / row 3;
-  grid-column: col 7 / col 8;
-  @extend %hint_up;
-}
-
-%hint_left {
-  box-shadow: inset 0 0.5px 0 0 $grey-color;
-  text-align: right;
-  align-content: center;
-  padding: 8px;
-}
-
-.nonogram__Hint--5 {
-  grid-row: row 3 / row 4;
-  grid-column: col 1 / col 3;
-  @extend %hint_left;
-  box-shadow: none;
-}
-
-.nonogram__Hint--6 {
-  grid-row: row 4 / row 5;
-  grid-column: col 1 / col 3;
-  @extend %hint_left;
-}
-
-.nonogram__Hint--7 {
-  grid-row: row 5 / row 6;
-  grid-column: col 1 / col 3;
-  @extend %hint_left;
-}
-
-.nonogram__Hint--8 {
-  grid-row: row 6 / row 7;
-  grid-column: col 1 / col 3;
-  @extend %hint_left;
-}
-
-.nonogram__Hint--9 {
-  grid-row: row 7 / row 8;
-  grid-column: col 1 / col 3;
-  @extend %hint_left;
-  border: none;
-}
-
-%hint_bottom {
-  box-shadow: inset 0.5px 0 0 0 $grey-color;
-  text-align: center;
-  align-content: start;
-  padding: 8px;
-}
-
-.nonogram__Hint--10 {
-  grid-row: row 8 / row 10;
-  grid-column: col 3 / col 4;
-  @extend %hint_bottom;
-  box-shadow: none;
-}
-
-.nonogram__Hint--11 {
-  grid-row: row 8 / row 10;
-  grid-column: col 4 / col 5;
-  @extend %hint_bottom;
-}
-
-.nonogram__Hint--12 {
-  grid-row: row 8 / row 10;
-  grid-column: col 5 / col 6;
-  @extend %hint_bottom;
-}
-
-.nonogram__Hint--13 {
-  grid-row: row 8 / row 10;
-  grid-column: col 6 / col 7;
-  @extend %hint_bottom;
-}
-
-.nonogram__Hint--14 {
-  grid-row: row 8 / row 10;
-  grid-column: col 7 / col 8;
-  @extend %hint_bottom;
-}
-
-%hint_right {
-  box-shadow: inset 0 0.5px 0 0 $grey-color;
-  text-align: left;
-  align-content: center;
-  padding: 8px;
-}
-
-.nonogram__Hint--15 {
-  grid-row: row 3 / row 4;
-  grid-column: col 8 / col 10;
-  @extend %hint_right;
-  box-shadow: none;
-}
-
-.nonogram__Hint--16 {
-  grid-row: row 4 / row 5;
-  grid-column: col 8 / col 10;
-  @extend %hint_right;
-}
-
-.nonogram__Hint--17 {
-  grid-row: row 5 / row 6;
-  grid-column: col 8 / col 10;
-  @extend %hint_right;
-}
-
-.nonogram__Hint--18 {
-  grid-row: row 6 / row 7;
-  grid-column: col 8 / col 10;
-  @extend %hint_right;
-}
-
-.nonogram__Hint--19 {
-  grid-row: row 7 / row 8;
-  grid-column: col 8 / col 10;
-  @extend %hint_right;
-}
 @media only screen and (min-width: 500px) and (max-width: 768px) {
   body {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     grid-template-areas:
-      "left"
       "main"
-      "right";
+      "menu";
   }
 }
