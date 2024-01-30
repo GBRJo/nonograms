@@ -24,18 +24,25 @@ $green-color: #d9fe95;
 
 .nonogram__cell {
   box-shadow: inset 0 0 0 0.4px $grey-color;
-}
-
-.nonogram__cell--5 {
-  background-color: $green-color;
-  box-shadow: none;
+  .right {
+    background: url(../assets/cross.svg);
+  }
+  .left {
+    background: url(../assets/box__1--green.svg);
+    box-shadow: none;
+  }
 }
 
 %hint_up {
   box-shadow: inset 0.5px 0 0 0 $grey-color;
   text-align: center;
   align-content: end;
-  padding: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .nonogram__Hint--0 {
@@ -71,9 +78,13 @@ $green-color: #d9fe95;
 
 %hint_left {
   box-shadow: inset 0 0.5px 0 0 $grey-color;
-  text-align: right;
   align-content: center;
-  padding: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .nonogram__Hint--5 {

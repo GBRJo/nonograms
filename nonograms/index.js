@@ -1,4 +1,27 @@
-// Создаем элементы DOM
+
+// Игровые поля
+var matrix = [
+  [1, 0, 0, 0, 0],
+  [2, 3, 0, 3, 0],
+  [2, 3, 3, 3, 2],
+  [2, 3, 3, 3, 0],
+  [2, 1, 1, 1, 0]
+];
+
+// Добавляем крест
+function toggleCross(nonogramCell) {
+  if (!nonogramCell.classList.contains('left')) {
+  nonogramCell.classList.toggle('right');
+  }
+  }
+  
+  function toggleBox(nonogramCell) {
+    if (!nonogramCell.classList.contains('right')) {
+  nonogramCell.classList.toggle('left');
+  }
+}
+
+  // Создаем элементы DOM
 var bodyElement1 = document.createElement("div");
 bodyElement1.className = "body__element body__element1";
 document.body.appendChild(bodyElement1);
@@ -16,11 +39,18 @@ for (var i = 0; i < 20; i++) {
   var nonogramHintCell = document.createElement("div");
   nonogramHintCell.className = "nonogram__Hint--" + i;
   nonogramContainer.appendChild(nonogramHintCell);
+  if (i < 10) {
+    var hintNum = document.createElement("p");
+    hintNum.className = "hint__number--" + i;
+    nonogramHintCell.appendChild(hintNum);
 
-  var hintNum = document.createElement("p");
-  hintNum.className = "hint__number";
-  hintNum.innerHTML = "1";
-  nonogramHintCell.appendChild(hintNum);
+    var hintNum2 = document.createElement("p");
+    hintNum2.className = "hint__number2--" + i;
+    nonogramHintCell.appendChild(hintNum2);
+
+    hintNum.innerHTML = "1";
+    hintNum2.innerHTML = "2";
+  }
 }
 
 var nonogramHintCell20 = document.createElement("div");
@@ -31,11 +61,20 @@ nonogramContainer.appendChild(nonogramHintCell20);
 for (var i = 0; i < 25; i++) {
   var nonogramCell = document.createElement("div");
   nonogramCell.className = "nonogram__cell nonogram__cell--" + i;
+  nonogramCell.id = "nonogram__cell--" + i;
   nonogramHintCell20.appendChild(nonogramCell);
+
+  nonogramCell.addEventListener('click', function(event) {
+    if (event.button === 0) {
+      toggleBox(this);
+    }
+  });
+
+  nonogramCell.addEventListener('contextmenu', function(event) {
+    event.preventDefault(); 
+    toggleCross(this);
+  });
 }
-
-
-
 
 var menuContainer = document.createElement("div");
 menuContainer.className = "menu__container";
@@ -72,14 +111,11 @@ timesText.className = "times__text";
 timeTopContent.appendChild(timesText);
 
 for (let i = 1; i <= 5; i++) {
-   var timeText = document.createElement("h4");
-   timeText.innerHTML = [i] + "  place - 00 : 00";
-   timeText.className = "time__text--" + [i];
-   timesText.appendChild(timeText);
+  var timeText = document.createElement("h4");
+  timeText.innerHTML = [i] + "  place  - - - 09 : 00";
+  timeText.className = "time__text--" + [i];
+  timesText.appendChild(timeText);
 }
-
-
-
 
 var gameFields = document.createElement("div");
 gameFields.className = "game__fields";
@@ -92,15 +128,23 @@ gameFields.appendChild(gameFieldsHeader);
 var gameFieldsSize = document.createElement("h4");
 gameFieldsSize.className = "field__size";
 gameFieldsSize.textContent = "5 X 5";
-gameFields.appendChild(gameFieldsSize );
+gameFields.appendChild(gameFieldsSize);
 
 var fields = document.createElement("div");
 fields.className = "fields";
 gameFields.appendChild(fields);
 
-var fieldArray = ["./assets/field__1.svg", "./assets/field__2.svg", "./assets/field__3.svg", "./assets/field__4.svg", "./assets/field__5.svg"];
+var fieldArray = [
+  "./assets/field__1.svg",
+  "./assets/field__2.svg",
+  "./assets/field__3.svg",
+  "./assets/field__4.svg",
+  "./assets/field__5.svg",
+  "./assets/shaffle.svg",
+  "./assets/saved.svg",
+];
 
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < 7; i++) {
   var field = document.createElement("img");
   field.className = "fields__change--" + i;
   field.src = fieldArray[i];
@@ -113,7 +157,8 @@ gameFields.appendChild(fieldInfo);
 
 var fieldInfoContent = document.createElement("div");
 fieldInfoContent.className = "field__info--content";
-fieldInfoContent.textContent = "Here you can choose a template or game difficulty. You can select a random template or load the last unfinished game.";
+fieldInfoContent.textContent =
+  "Here you can choose a template or game difficulty. You can select a random template or load the last unfinished game.";
 fieldInfo.appendChild(fieldInfoContent);
 
 var fieldInfoHeader = document.createElement("div");
