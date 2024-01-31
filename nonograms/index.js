@@ -1,27 +1,18 @@
-
 // Игровые поля
 var matrix = [
   [1, 0, 0, 0, 0],
   [2, 3, 0, 3, 0],
   [2, 3, 3, 3, 2],
   [2, 3, 3, 3, 0],
-  [2, 1, 1, 1, 0]
+  [2, 1, 1, 1, 0],
 ];
 
-// Добавляем крест
-function toggleCross(nonogramCell) {
-  if (!nonogramCell.classList.contains('left')) {
-  nonogramCell.classList.toggle('right');
-  }
-  }
-  
-  function toggleBox(nonogramCell) {
-    if (!nonogramCell.classList.contains('right')) {
-  nonogramCell.classList.toggle('left');
-  }
-}
+let firstHints = [];
+let secondHints = [];
 
-  // Создаем элементы DOM
+showHint();
+
+// Создаем элементы DOM
 var bodyElement1 = document.createElement("div");
 bodyElement1.className = "body__element body__element1";
 document.body.appendChild(bodyElement1);
@@ -39,6 +30,7 @@ for (var i = 0; i < 20; i++) {
   var nonogramHintCell = document.createElement("div");
   nonogramHintCell.className = "nonogram__Hint--" + i;
   nonogramContainer.appendChild(nonogramHintCell);
+
   if (i < 10) {
     var hintNum = document.createElement("p");
     hintNum.className = "hint__number--" + i;
@@ -48,8 +40,13 @@ for (var i = 0; i < 20; i++) {
     hintNum2.className = "hint__number2--" + i;
     nonogramHintCell.appendChild(hintNum2);
 
-    hintNum.innerHTML = "1";
-    hintNum2.innerHTML = "2";
+    if (i < firstHints.length) {
+      hintNum2.innerHTML = firstHints[i] === 0 ? "" : firstHints[i];
+    }
+
+    if (i < secondHints.length) {
+      hintNum.innerHTML = secondHints[i] === 0 ? "" : secondHints[i];
+    }
   }
 }
 
@@ -57,21 +54,20 @@ var nonogramHintCell20 = document.createElement("div");
 nonogramHintCell20.className = "nonogram__Hint--" + 20;
 nonogramContainer.appendChild(nonogramHintCell20);
 
-
 for (var i = 0; i < 25; i++) {
   var nonogramCell = document.createElement("div");
   nonogramCell.className = "nonogram__cell nonogram__cell--" + i;
   nonogramCell.id = "nonogram__cell--" + i;
   nonogramHintCell20.appendChild(nonogramCell);
 
-  nonogramCell.addEventListener('click', function(event) {
+  nonogramCell.addEventListener("click", function (event) {
     if (event.button === 0) {
       toggleBox(this);
     }
   });
 
-  nonogramCell.addEventListener('contextmenu', function(event) {
-    event.preventDefault(); 
+  nonogramCell.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
     toggleCross(this);
   });
 }
@@ -165,3 +161,85 @@ var fieldInfoHeader = document.createElement("div");
 fieldInfoHeader.className = "field__info--header";
 fieldInfoHeader.textContent = "--how to play?";
 fieldInfo.appendChild(fieldInfoHeader);
+
+// Закрашиваем боксы
+function toggleCross(nonogramCell) {
+  if (!nonogramCell.classList.contains("left")) {
+    nonogramCell.classList.toggle("right");
+  }
+}
+
+function toggleBox(nonogramCell) {
+  if (!nonogramCell.classList.contains("right")) {
+    nonogramCell.classList.toggle("left");
+  }
+}
+
+// Отображаем подсказки
+
+function showHint() {
+  var column = matrix.length;
+  var row = matrix[0].length;
+
+  for (var j = 0; j < row; j++) {
+    let firstHint = 0;
+    let secondHint = 0;
+    let firstHintPassed = false;
+
+    for (var i = 0; i < column; i++) {
+      if (matrix[i][j] !== 0) {
+        if (matrix[i + 1] && matrix[i + 1][j] !== 0) {
+          if (firstHintPassed) {
+            secondHint++;
+          } else {
+            firstHint++;
+          }
+        } else {
+          if (firstHintPassed) {
+            secondHint++;
+            firstHintPassed = true;
+          } else {
+            firstHint++;
+            firstHintPassed = true;
+          }
+        }
+      }
+    }
+
+    firstHints.push(firstHint);
+    secondHints.push(secondHint);
+  }
+
+  for (var i = 0; i < column; i++) {
+    let firstHint = 0;
+    let secondHint = 0;
+    let firstHintPassed = false;
+
+    for (var j = 0; j < row; j++) {
+      if (matrix[i][j] !== 0) {
+        if (matrix[i][j + 1] !== 0) {
+          if (firstHintPassed) {
+            secondHint++;
+          } else {
+            firstHint++;
+          }
+        } else {
+          if (firstHintPassed) {
+            secondHint++;
+            firstHintPassed = true;
+          } else {
+            firstHint++;
+            firstHintPassed = true;
+          }
+        }
+      }
+    }
+
+    firstHints.push(firstHint);
+    secondHints.push(secondHint);
+  }
+}
+
+// Связываем подсказки и закрашиваемые боксы
+
+// Отображаем неактуальные подсказки
