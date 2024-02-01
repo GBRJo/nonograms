@@ -70,6 +70,7 @@ for (var i = 0; i < 25; i++) {
         toggleBox(this);
       } else {
         this.innerHTML = "<span>No</span>";
+        audioNo.play();
         setTimeout(() => {
           this.innerHTML = "";
         }, 500);
@@ -84,6 +85,7 @@ for (var i = 0; i < 25; i++) {
       toggleCross(this);
     } else {
       this.innerHTML = "<span>No</span>";
+      audioNo.play();
       setTimeout(() => {
         this.innerHTML = "";
       }, 500);
@@ -181,18 +183,45 @@ fieldInfoHeader.className = "field__info--header";
 fieldInfoHeader.textContent = "--how to play?";
 fieldInfo.appendChild(fieldInfoHeader);
 
+var audioFolder = document.createElement("div");
+document.body.appendChild(audioFolder);
+
+var audioClick = document.createElement("audio");
+audioClick.src = "./assets/718371__binauralcow__click2.mp3"; 
+audioFolder.appendChild(audioClick);
+
+var audioClickOff = document.createElement("audio");
+audioClickOff.src = "./assets/669918__el_boss__the-best-bubble-pop-sound-for-game-and-ui.wav"; 
+audioFolder.appendChild(audioClickOff);
+
+var audioNo = document.createElement("audio");
+audioNo.src = "./assets/220198__gameaudio__click-with-two-parts.wav"; 
+audioFolder.appendChild(audioNo);
+
+var audioCross = document.createElement("audio");
+audioCross.src = "./assets/220204__gameaudio__ping-sound-ricochet.wav"; 
+audioFolder.appendChild(audioCross);
+
+var audioWin = document.createElement("audio");
+audioWin.src = "./assets/220204__gameaudio__ping-sound-ricochet.wav"; 
+audioFolder.appendChild(audioWin);
+
 // Закрашиваем боксы
 function toggleCross(nonogramCell) {
   if (!nonogramCell.classList.contains("left")) {
     nonogramCell.classList.toggle("right");
+    audioCross.play();
   }
 }
 
 function toggleBox(nonogramCell) {
   if (!nonogramCell.classList.contains("right")) {
     nonogramCell.classList.toggle("left");
+    var audio = nonogramCell.classList.contains("left") ? audioClick : audioClickOff;
+    audio.play();
   }
 }
+
 
 // Отображаем подсказки
 function showHint() {
