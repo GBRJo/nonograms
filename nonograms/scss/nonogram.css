@@ -26,7 +26,6 @@
   background: url(../assets/cross.svg);
 }
 .nonogram__cell.left {
-  background: url(../assets/box__1--green.svg);
   box-shadow: none;
 }
 

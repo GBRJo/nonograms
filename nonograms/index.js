@@ -66,8 +66,8 @@ for (var i = 0; i < 25; i++) {
     if (event.button === 0) {
       var cellIndex = this.id;
       if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] !== 0) {
+        addColorsToMatrix(this);
         toggleBox(this);
-        addColorsToMatrix(this, matrix);
       } else {
         this.innerHTML = "<span>No</span>";
         setTimeout(() => {
@@ -259,17 +259,21 @@ function showHint() {
 }
 
 // Вводим дополнительные цвета
-function addColorsToMatrix(cell, matrix) {
-  cell.style.background = 'none';
+function addColorsToMatrix(cell) {
   var cellIndex = cell.id;
-  if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 1) {
-    cell.style.background = 'url(./assets/box__1--green.svg)';
-  } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 2) {
-    cell.style.background = 'url(./assets/box__2--blue.svg)';
-  } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 3) {
-    cell.style.background = 'url(./assets/box__3--brown.svg)';
+  if (cell.classList.contains("left")) {
+    cell.style.background = 'none';
+  } else {
+    if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 1) {
+      cell.style.background = 'url(./assets/box__1--green.svg)';
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 2) {
+      cell.style.background = 'url(./assets/box__2--blue.svg)';
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 3) {
+      cell.style.background = 'url(./assets/box__3--brown.svg)';
+    }
   }
 }
+
 
 
 // Вводим звуковое сопровождение 
