@@ -64,20 +64,27 @@ for (var i = 0; i < 25; i++) {
     if (event.button === 0) {
       var cellIndex = this.id;
       if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] !== 0) {
-          toggleBox(this);
+        toggleBox(this);
       } else {
-            this.innerHTML = "<span>No</span>";
-         setTimeout(() => {
+        this.innerHTML = "<span>No</span>";
+        setTimeout(() => {
           this.innerHTML = "";
         }, 500);
       }
     }
   });
 
-
   nonogramCell.addEventListener("contextmenu", function (event) {
     event.preventDefault();
-    toggleCross(this);
+    var cellIndex = this.id;
+    if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 0) {
+      toggleCross(this);
+    } else {
+      this.innerHTML = "<span>No</span>";
+      setTimeout(() => {
+        this.innerHTML = "";
+      }, 500);
+    }
   });
 }
 
@@ -173,7 +180,7 @@ fieldInfo.appendChild(fieldInfoHeader);
 
 // Закрашиваем боксы
 function toggleCross(nonogramCell) {
-    if (!nonogramCell.classList.contains("left")) {
+  if (!nonogramCell.classList.contains("left")) {
     nonogramCell.classList.toggle("right");
   }
 }
