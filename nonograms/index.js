@@ -12,6 +12,8 @@ let secondHints = [];
 
 showHint();
 
+var hintNum;
+
 // Создаем элементы DOM
 var bodyElement1 = document.createElement("div");
 bodyElement1.className = "body__element body__element1";
@@ -65,6 +67,7 @@ for (var i = 0; i < 25; i++) {
       var cellIndex = this.id;
       if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] !== 0) {
         toggleBox(this);
+        addColorsToMatrix(this, matrix);
       } else {
         this.innerHTML = "<span>No</span>";
         setTimeout(() => {
@@ -192,7 +195,6 @@ function toggleBox(nonogramCell) {
 }
 
 // Отображаем подсказки
-
 function showHint() {
   var column = matrix.length;
   var row = matrix[0].length;
@@ -256,6 +258,28 @@ function showHint() {
   }
 }
 
-// Связываем подсказки и закрашиваемые боксы
+// Вводим дополнительные цвета
+function addColorsToMatrix(cell, matrix) {
+  cell.style.background = 'none';
+  var cellIndex = cell.id;
+  if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 1) {
+    cell.style.background = 'url(./assets/box__1--green.svg)';
+  } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 2) {
+    cell.style.background = 'url(./assets/box__2--blue.svg)';
+  } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 3) {
+    cell.style.background = 'url(./assets/box__3--brown.svg)';
+  }
+}
+
+
+// Вводим звуковое сопровождение 
+
+// Добавляем все шаблоны
+
+// Реализуем конец игры
+
+
+
+
 
 // Отображаем неактуальные подсказки
