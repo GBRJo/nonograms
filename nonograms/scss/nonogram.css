@@ -1,3 +1,7 @@
+.body__element2 {
+  padding: 0 48px;
+}
+
 .nonogram__container {
   width: 432px;
   height: 432px;
@@ -5,6 +9,14 @@
   display: grid;
   grid-template-columns: repeat(9, [col] 48px);
   grid-template-rows: repeat(9, [row] 48px);
+}
+
+.nonogram__container--finish {
+  display: none;
+  background-image: url(/nonograms/assets/final__1.svg);
+  height: 432px;
+  width: 720px;
+  margin: auto;
 }
 
 .nonogram__Hint--20 {

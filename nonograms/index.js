@@ -1,11 +1,38 @@
 // Игровые поля
-var matrix = [
+const matrixes = [[
   [1, 0, 0, 0, 0],
   [2, 3, 0, 3, 0],
   [2, 3, 3, 3, 2],
   [2, 3, 3, 3, 0],
   [2, 1, 1, 1, 0],
+],[
+  [1, 0, 0, 0, 0],
+  [2, 3, 0, 3, 0],
+  [2, 3, 3, 3, 2],
+  [2, 3, 3, 3, 0],
+  [2, 1, 1, 1, 0],
+],[
+  [1, 0, 0, 0, 0],
+  [2, 3, 0, 3, 0],
+  [2, 3, 3, 3, 2],
+  [2, 3, 3, 3, 0],
+  [2, 1, 1, 1, 0],
+],[
+  [1, 0, 0, 0, 0],
+  [2, 3, 0, 3, 0],
+  [2, 3, 3, 3, 2],
+  [2, 3, 3, 3, 0],
+  [2, 1, 1, 1, 0],
+],[
+  [1, 0, 0, 0, 0],
+  [2, 3, 0, 3, 0],
+  [2, 3, 3, 3, 2],
+  [2, 3, 3, 3, 0],
+  [2, 1, 1, 1, 0],
+]
 ];
+
+var matrix = matrixes[0];
 
 let firstHints = [];
 let secondHints = [];
@@ -27,6 +54,10 @@ var nonogramContainer = document.createElement("div");
 nonogramContainer.className = "nonogram__container";
 nonogramContainer.id = "nonogram__container";
 bodyElement1.appendChild(nonogramContainer);
+
+var nonogramContainerFinish = document.createElement("div");
+nonogramContainerFinish.className = "nonogram__container--finish";
+bodyElement1.appendChild(nonogramContainerFinish);
 
 for (var i = 0; i < 20; i++) {
   var nonogramHintCell = document.createElement("div");
@@ -203,7 +234,7 @@ audioCross.src = "./assets/220204__gameaudio__ping-sound-ricochet.wav";
 audioFolder.appendChild(audioCross);
 
 var audioWin = document.createElement("audio");
-audioWin.src = "./assets/220204__gameaudio__ping-sound-ricochet.wav"; 
+audioWin.src = "./assets/619838__eponn__achievement-happy-beeps-jingle.wav"; 
 audioFolder.appendChild(audioWin);
 
 // Закрашиваем боксы
@@ -219,6 +250,7 @@ function toggleBox(nonogramCell) {
     nonogramCell.classList.toggle("left");
     var audio = nonogramCell.classList.contains("left") ? audioClick : audioClickOff;
     audio.play();
+    checkGameEnd(matrix);
   }
 }
 
@@ -303,13 +335,65 @@ function addColorsToMatrix(cell) {
   }
 }
 
+// Реализуем конец игры
+function checkGameEnd(matrix) {
+  var gameEnded = true;
+  var column = matrix.length;
+  var row = matrix[0].length;
 
+  for (var i = 0; i < column; i++) {
+    for (var j = 0; j < row; j++) {
+      if (matrix[i][j] !== 0) {
+        var cellId = i * row + j; 
+        var nonogramCell = document.getElementById(cellId);
+       
+        if (!nonogramCell.classList.contains("left")) {
+          gameEnded = false;
+          break;
+        }
+      }
+    }
 
-// Вводим звуковое сопровождение 
+    if (!gameEnded) {
+      break;
+    }
+  }
+
+  if (gameEnded) {
+    setTimeout(() => {
+      audioWin.play();
+      nonogramContainer.style.display = 'none';
+    nonogramContainerFinish.style.display = 'block';
+    }, 1000);
+   
+  }
+}
+
+document.addEventListener("keydown", function () {
+  function showSolution() {
+    var column = matrix.length;
+    var row = matrix[0].length;
+
+    for (var i = 0; i < column; i++) {
+      for (var j = 0; j < row; j++) {
+        if (matrix[i][j] !== 0) {
+          var cellId = "nonogram__cell--" + (i * row + j);
+          var nonogramCell = document.getElementById(cellId);
+          addColorsToMatrix(cell);
+        } else {
+          nonogramCell.classList.toggle("right");
+        }
+      }
+    }
+  }
+
+  showSolution();
+});
+
 
 // Добавляем все шаблоны
 
-// Реализуем конец игры
+
 
 
 
