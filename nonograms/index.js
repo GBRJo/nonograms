@@ -57,14 +57,23 @@ nonogramContainer.appendChild(nonogramHintCell20);
 for (var i = 0; i < 25; i++) {
   var nonogramCell = document.createElement("div");
   nonogramCell.className = "nonogram__cell nonogram__cell--" + i;
-  nonogramCell.id = "nonogram__cell--" + i;
+  nonogramCell.id = i;
   nonogramHintCell20.appendChild(nonogramCell);
 
   nonogramCell.addEventListener("click", function (event) {
     if (event.button === 0) {
-      toggleBox(this);
+      var cellIndex = this.id;
+      if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] !== 0) {
+          toggleBox(this);
+      } else {
+            this.innerHTML = "<span>No</span>";
+         setTimeout(() => {
+          this.innerHTML = "";
+        }, 500);
+      }
     }
   });
+
 
   nonogramCell.addEventListener("contextmenu", function (event) {
     event.preventDefault();
@@ -164,7 +173,7 @@ fieldInfo.appendChild(fieldInfoHeader);
 
 // Закрашиваем боксы
 function toggleCross(nonogramCell) {
-  if (!nonogramCell.classList.contains("left")) {
+    if (!nonogramCell.classList.contains("left")) {
     nonogramCell.classList.toggle("right");
   }
 }

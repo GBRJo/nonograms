@@ -18,11 +18,14 @@
 
 .nonogram__cell {
   box-shadow: inset 0 0 0 0.4px #c0c4cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.nonogram__cell .right {
+.nonogram__cell.right {
   background: url(../assets/cross.svg);
 }
-.nonogram__cell .left {
+.nonogram__cell.left {
   background: url(../assets/box__1--green.svg);
   box-shadow: none;
 }
