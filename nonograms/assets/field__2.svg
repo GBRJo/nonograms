@@ -1,11 +1,27 @@
-<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect y="48" width="60" height="12" fill="#FA3263"/>
-<rect y="36" width="60" height="12" fill="#F1F2F2"/>
-<rect y="23.9999" width="60" height="12" fill="#311963"/>
-<rect y="12" width="60" height="12" fill="#F1F2F2"/>
-<rect x="12" width="12" height="12" transform="rotate(90 12 0)" fill="#FA3263"/>
-<rect x="24" width="12" height="12" transform="rotate(90 24 0)" fill="#F1F2F2"/>
-<rect x="36" width="12" height="12" transform="rotate(90 36 0)" fill="#00B0C8"/>
-<rect x="48" width="12" height="12" transform="rotate(90 48 0)" fill="#F1F2F2"/>
-<rect x="60" width="12" height="12" transform="rotate(90 60 0)" fill="#00B0C8"/>
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="48" height="48" fill="#F2F2F2"/>
+<rect x="48" width="48" height="48" fill="#2F9599"/>
+<rect x="96" width="48" height="48" fill="#2F9599"/>
+<rect x="144" width="48" height="48" fill="#2F9599"/>
+<rect x="192" width="48" height="48" fill="#F2F2F2"/>
+<rect y="48" width="48" height="48" fill="#F2F2F2"/>
+<rect x="48" y="48" width="48" height="48" fill="#F2F2F2"/>
+<rect x="96" y="48" width="48" height="48" fill="#F2F2F2"/>
+<rect x="144" y="48" width="48" height="48" fill="#F2F2F2"/>
+<rect x="192" y="48" width="48" height="48" fill="#F2F2F2"/>
+<rect y="96" width="48" height="48" fill="#2F9599"/>
+<rect x="48" y="96" width="48" height="48" fill="#F2F2F2"/>
+<rect x="96" y="96" width="48" height="48" fill="#F2F2F2"/>
+<rect x="144" y="96" width="48" height="48" fill="#FF9000"/>
+<rect x="192" y="96" width="48" height="48" fill="#FF9000"/>
+<rect y="144" width="48" height="48" fill="#F2F2F2"/>
+<rect x="48" y="144" width="48" height="48" fill="#F2F2F2"/>
+<rect x="96" y="144" width="48" height="48" fill="#F2F2F2"/>
+<rect x="144" y="144" width="48" height="48" fill="#F2F2F2"/>
+<rect x="192" y="144" width="48" height="48" fill="#FF9000"/>
+<rect y="192" width="48" height="48" fill="#EF1B44"/>
+<rect x="48" y="192" width="48" height="48" fill="#F2F2F2"/>
+<rect x="96" y="192" width="48" height="48" fill="#1F203E"/>
+<rect x="144" y="192" width="48" height="48" fill="#F2F2F2"/>
+<rect x="192" y="192" width="48" height="48" fill="#F2F2F2"/>
 </svg>

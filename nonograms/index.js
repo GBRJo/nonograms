@@ -1,35 +1,40 @@
 // Игровые поля
-const matrixes = [[
-  [1, 0, 0, 0, 0],
-  [2, 3, 0, 3, 0],
-  [2, 3, 3, 3, 2],
-  [2, 3, 3, 3, 0],
-  [2, 1, 1, 1, 0],
-],[
-  [1, 0, 0, 0, 0],
-  [2, 3, 0, 3, 0],
-  [2, 3, 3, 3, 2],
-  [2, 3, 3, 3, 0],
-  [2, 1, 1, 1, 0],
-],[
-  [1, 0, 0, 0, 0],
-  [2, 3, 0, 3, 0],
-  [2, 3, 3, 3, 2],
-  [2, 3, 3, 3, 0],
-  [2, 1, 1, 1, 0],
-],[
-  [1, 0, 0, 0, 0],
-  [2, 3, 0, 3, 0],
-  [2, 3, 3, 3, 2],
-  [2, 3, 3, 3, 0],
-  [2, 1, 1, 1, 0],
-],[
-  [1, 0, 0, 0, 0],
-  [2, 3, 0, 3, 0],
-  [2, 3, 3, 3, 2],
-  [2, 3, 3, 3, 0],
-  [2, 1, 1, 1, 0],
-]
+const matrixes = [
+  [
+    [1, 0, 0, 0, 0],
+    [2, 3, 0, 3, 0],
+    [2, 3, 3, 3, 2],
+    [2, 3, 3, 3, 0],
+    [2, 1, 1, 1, 0],
+  ],
+  [
+    [0, 4, 4, 4, 0],
+    [0, 0, 0, 0, 0],
+    [4, 0, 0, 5, 5],
+    [0, 0, 0, 0, 5],
+    [6, 0, 7, 0, 0],
+  ],
+  [
+    [8, 9, 9, 9, 10],
+    [8, 10, 10, 10, 11],
+    [8, 10, 10, 8, 10],
+    [11, 10, 8, 8, 10],
+    [10, 0, 0, 0, 8],
+  ],
+  [
+    [0, 0, 0, 0, 0],
+    [12, 12, 0, 13, 13],
+    [12, 12, 0, 13, 13],
+    [12, 0, 0, 0, 0],
+    [0, 0, 0, 14, 14],
+  ],
+  [
+    [15, 15, 15, 15, 15],
+    [15, 15, 15, 15, 15],
+    [0, 0, 0, 0, 0],
+    [16, 16, 16, 16, 16],
+    [16, 16, 16, 16, 16],
+  ],
 ];
 
 var matrix = matrixes[0];
@@ -218,23 +223,24 @@ var audioFolder = document.createElement("div");
 document.body.appendChild(audioFolder);
 
 var audioClick = document.createElement("audio");
-audioClick.src = "./assets/718371__binauralcow__click2.mp3"; 
+audioClick.src = "./assets/718371__binauralcow__click2.mp3";
 audioFolder.appendChild(audioClick);
 
 var audioClickOff = document.createElement("audio");
-audioClickOff.src = "./assets/669918__el_boss__the-best-bubble-pop-sound-for-game-and-ui.wav"; 
+audioClickOff.src =
+  "./assets/669918__el_boss__the-best-bubble-pop-sound-for-game-and-ui.wav";
 audioFolder.appendChild(audioClickOff);
 
 var audioNo = document.createElement("audio");
-audioNo.src = "./assets/220198__gameaudio__click-with-two-parts.wav"; 
+audioNo.src = "./assets/220198__gameaudio__click-with-two-parts.wav";
 audioFolder.appendChild(audioNo);
 
 var audioCross = document.createElement("audio");
-audioCross.src = "./assets/220204__gameaudio__ping-sound-ricochet.wav"; 
+audioCross.src = "./assets/220204__gameaudio__ping-sound-ricochet.wav";
 audioFolder.appendChild(audioCross);
 
 var audioWin = document.createElement("audio");
-audioWin.src = "./assets/619838__eponn__achievement-happy-beeps-jingle.wav"; 
+audioWin.src = "./assets/619838__eponn__achievement-happy-beeps-jingle.wav";
 audioFolder.appendChild(audioWin);
 
 // Закрашиваем боксы
@@ -248,12 +254,13 @@ function toggleCross(nonogramCell) {
 function toggleBox(nonogramCell) {
   if (!nonogramCell.classList.contains("right")) {
     nonogramCell.classList.toggle("left");
-    var audio = nonogramCell.classList.contains("left") ? audioClick : audioClickOff;
+    var audio = nonogramCell.classList.contains("left")
+      ? audioClick
+      : audioClickOff;
     audio.play();
     checkGameEnd(matrix);
   }
 }
-
 
 // Отображаем подсказки
 function showHint() {
@@ -323,18 +330,43 @@ function showHint() {
 function addColorsToMatrix(cell) {
   var cellIndex = cell.id;
   if (cell.classList.contains("left")) {
-    cell.style.background = 'none';
+    cell.style.background = "none";
   } else {
     if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 1) {
-      cell.style.background = 'url(./assets/box__1--green.svg)';
+      cell.style.background = "url(./assets/box__1--green.svg)";
     } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 2) {
-      cell.style.background = 'url(./assets/box__2--blue.svg)';
+      cell.style.background = "url(./assets/box__2--blue.svg)";
     } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 3) {
-      cell.style.background = 'url(./assets/box__3--brown.svg)';
+      cell.style.background = "url(./assets/box__3--brown.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 4) {
+      cell.style.background = "url(./assets/box__4--greenblue.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 5) {
+      cell.style.background = "url(./assets/box__5--yeulow.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 6) {
+      cell.style.background = "url(./assets/box__6--red.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 7) {
+      cell.style.background = "url(./assets/box__7--black.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 8) {
+      cell.style.background = "url(./assets/box__8--red.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 9) {
+      cell.style.background = "url(./assets/box__9--green.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 10) {
+      cell.style.background = "url(./assets/box__10--brown.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 11) {
+      cell.style.background = "url(./assets/box__11--green.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 12) {
+      cell.style.background = "url(./assets/box__12--red.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 13) {
+      cell.style.background = "url(./assets/box__13--brown.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 14) {
+      cell.style.background = "url(./assets/box__14--yelow.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 15) {
+      cell.style.background = "url(./assets/box__15--navy.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 16) {
+      cell.style.background = "url(./assets/box__16--red.svg)";
     }
   }
 }
-
 // Реализуем конец игры
 function checkGameEnd(matrix) {
   var gameEnded = true;
@@ -344,9 +376,9 @@ function checkGameEnd(matrix) {
   for (var i = 0; i < column; i++) {
     for (var j = 0; j < row; j++) {
       if (matrix[i][j] !== 0) {
-        var cellId = i * row + j; 
+        var cellId = i * row + j;
         var nonogramCell = document.getElementById(cellId);
-       
+
         if (!nonogramCell.classList.contains("left")) {
           gameEnded = false;
           break;
@@ -362,10 +394,9 @@ function checkGameEnd(matrix) {
   if (gameEnded) {
     setTimeout(() => {
       audioWin.play();
-      nonogramContainer.style.display = 'none';
-    nonogramContainerFinish.style.display = 'block';
+      nonogramContainer.style.display = "none";
+      nonogramContainerFinish.style.display = "block";
     }, 1000);
-   
   }
 }
 
@@ -390,13 +421,6 @@ document.addEventListener("keydown", function () {
   showSolution();
 });
 
-
 // Добавляем все шаблоны
-
-
-
-
-
-
 
 // Отображаем неактуальные подсказки
