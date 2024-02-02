@@ -37,7 +37,8 @@ const matrixes = [
   ],
 ];
 
-var matrix = matrixes[0];
+var currentLevel = 0;
+var matrix = matrixes[currentLevel];
 
 let firstHints = [];
 let secondHints = [];
@@ -170,6 +171,19 @@ for (let i = 1; i <= 5; i++) {
   timesText.appendChild(timeText);
 }
 
+var endGame = document.createElement("div");
+endGame.className = "game__end";
+menuContainer.appendChild(endGame);
+
+var gameEndHeader = document.createElement("h2");
+gameEndHeader.textContent = "You solved a nonogram!";
+endGame.appendChild(gameEndHeader);
+
+var endButton = document.createElement("button");
+endButton.className = "button__end";
+endButton.innerHTML = "Next game";
+endGame.appendChild(endButton);
+
 var gameFields = document.createElement("div");
 gameFields.className = "game__fields";
 menuContainer.appendChild(gameFields);
@@ -192,17 +206,25 @@ var fieldArray = [
   "./assets/field__2.svg",
   "./assets/field__3.svg",
   "./assets/field__4.svg",
-  "./assets/field__5.svg",
-  "./assets/shaffle.svg",
-  "./assets/saved.svg",
+  "./assets/field__5.svg"
 ];
 
-for (var i = 0; i < 7; i++) {
+for (var i = 0; i < 5; i++) {
   var field = document.createElement("img");
   field.className = "fields__change--" + i;
   field.src = fieldArray[i];
   fields.appendChild(field);
 }
+
+var resetButton = document.createElement("button");
+resetButton.className = "button__reset";
+resetButton.innerHTML = '<img src="./assets/restart.svg" />';
+fields.appendChild(resetButton);
+
+var shaffleButton = document.createElement("button");
+shaffleButton.className = "button__shaffle";
+shaffleButton.innerHTML = '<img src="./assets/shaffl.svg" />';
+fields.appendChild(shaffleButton);
 
 var fieldInfo = document.createElement("div");
 fieldInfo.className = "field__info";
@@ -396,9 +418,55 @@ function checkGameEnd(matrix) {
       audioWin.play();
       nonogramContainer.style.display = "none";
       nonogramContainerFinish.style.display = "block";
+      endGame.style.display = "flex";
+      timeSign.style.display = "none";
     }, 1000);
   }
 }
+
+// Сброс игры 
+resetButton.addEventListener("click", reStartGame);
+
+function reStartGame() {
+  var column = matrix.length;
+  var row = matrix[0].length;
+
+  for (var i = 0; i < column; i++) {
+    for (var j = 0; j < row; j++) {
+            var cellId = i * row + j;
+        var nonogramCell = document.getElementById(cellId);
+        if (nonogramCell.classList.contains("left")) {
+          nonogramCell.classList.remove("left");
+          nonogramCell.style.background = "none";
+        }
+        if (nonogramCell.classList.contains("right")) {
+          nonogramCell.classList.remove("right");
+          }
+    }
+  }
+}
+
+// Запускаем следующую игру 
+endButton.addEventListener("click", newGame);
+
+function newGame() {
+  currentLevel++;
+  console.log(currentLevel);
+  if (currentLevel < matrixes.length) {
+    matrix = matrixes[currentLevel];
+  }
+  reStartGame();
+  showHint();
+  nonogramContainer.style.display = "block";
+  nonogramContainerFinish.style.display = "none";
+  endGame.style.display = "none";
+}
+
+
+
+
+
+
 
 document.addEventListener("keydown", function () {
   function showSolution() {
@@ -420,7 +488,5 @@ document.addEventListener("keydown", function () {
 
   showSolution();
 });
-
-// Добавляем все шаблоны
 
 // Отображаем неактуальные подсказки
