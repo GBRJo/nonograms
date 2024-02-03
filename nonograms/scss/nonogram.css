@@ -13,7 +13,6 @@
 
 .nonogram__container--finish {
   display: none;
-  background-image: url(/nonograms/assets/final__1.svg);
   height: 432px;
   width: 720px;
   margin: auto;

@@ -398,6 +398,21 @@ function addColorsToMatrix(cell) {
     }
   }
 }
+
+// Добавляем финалы для каждого шаблона
+function addFinals(currentLevel) {
+  var finalArray = [
+    "./assets/final__1.svg",
+    "./assets/final__2.svg",
+    "./assets/final__3.svg",
+    "./assets/final__4.svg",
+    "./assets/final__5.svg"
+  ];
+var  nonogramContainerFinish = document.querySelector(".nonogram__container--finish");
+    let final = finalArray[currentLevel];
+    nonogramContainerFinish.style.backgroundImage = "url(" + final + ")";
+  }
+
 // Реализуем конец игры
 function checkGameEnd(matrix) {
   var gameEnded = true;
@@ -427,6 +442,7 @@ function checkGameEnd(matrix) {
       audioWin.play();
       nonogramContainer.style.display = "none";
       nonogramContainerFinish.style.display = "block";
+      addFinals(currentLevel);
       endGame.style.display = "flex";
       timeSign.style.display = "none";
     }, 1000);
