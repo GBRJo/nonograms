@@ -39,8 +39,13 @@ const matrixes = [
 
 var currentLevel = 0;
 var matrix = matrixes[currentLevel];
-
 var hintNum;
+
+let intervalId;
+let currentTime = 0;
+let gamePlaying = false;
+let firstClick = false;
+
 
 // Создаем элементы DOM
 var bodyElement1 = document.createElement("div");
@@ -193,7 +198,7 @@ var fieldArray = [
   "./assets/field__2.svg",
   "./assets/field__3.svg",
   "./assets/field__4.svg",
-  "./assets/field__5.svg"
+  "./assets/field__5.svg",
 ];
 
 for (var i = 0; i < 5; i++) {
@@ -271,7 +276,6 @@ function toggleBox(nonogramCell) {
   }
 }
 
-
 // Заполняем слоты подсказками
 function fillHint(firstHints, secondHints) {
   for (var i = 0; i < 10; i++) {
@@ -280,18 +284,17 @@ function fillHint(firstHints, secondHints) {
     if (i < firstHints.length) {
       hintNum2.innerHTML = firstHints[i] === 0 ? "" : firstHints[i];
     }
-  
+
     if (i < secondHints.length) {
       hintNum.innerHTML = secondHints[i] === 0 ? "" : secondHints[i];
     }
   }
 }
 
-
 // Отображаем подсказки
 function showHint() {
-let firstHints = [];
-let secondHints = [];
+  let firstHints = [];
+  let secondHints = [];
 
   var column = matrix.length;
   var row = matrix[0].length;
@@ -352,7 +355,7 @@ let secondHints = [];
     firstHints.push(firstHint);
     secondHints.push(secondHint);
   }
-  fillHint(firstHints, secondHints)
+  fillHint(firstHints, secondHints);
 }
 
 showHint();
@@ -406,12 +409,14 @@ function addFinals(currentLevel) {
     "./assets/final__2.svg",
     "./assets/final__3.svg",
     "./assets/final__4.svg",
-    "./assets/final__5.svg"
+    "./assets/final__5.svg",
   ];
-var  nonogramContainerFinish = document.querySelector(".nonogram__container--finish");
-    let final = finalArray[currentLevel];
-    nonogramContainerFinish.style.backgroundImage = "url(" + final + ")";
-  }
+  var nonogramContainerFinish = document.querySelector(
+    ".nonogram__container--finish"
+  );
+  let final = finalArray[currentLevel];
+  nonogramContainerFinish.style.backgroundImage = "url(" + final + ")";
+}
 
 // Реализуем конец игры
 function checkGameEnd(matrix) {
@@ -424,7 +429,6 @@ function checkGameEnd(matrix) {
       if (matrix[i][j] !== 0) {
         var cellId = i * row + j;
         var nonogramCell = document.getElementById(cellId);
-
         if (!nonogramCell.classList.contains("left")) {
           gameEnded = false;
           break;
@@ -438,7 +442,10 @@ function checkGameEnd(matrix) {
   }
 
   if (gameEnded) {
+    timeSign.style.display = "none";
+    pauseTimer()
     setTimeout(() => {
+      firstClick = false;
       audioWin.play();
       nonogramContainer.style.display = "none";
       nonogramContainerFinish.style.display = "block";
@@ -449,30 +456,34 @@ function checkGameEnd(matrix) {
   }
 }
 
-// Сброс игры 
+// Сброс игры
 resetButton.addEventListener("click", reStartGame);
 
 function reStartGame() {
+  pauseTimer();
+  resetTimer();
+  nonogramContainerFinish.style.display = "none";
+  nonogramContainer.style.display = "grid";
+  endGame.style.display = "none";
   var column = matrix.length;
   var row = matrix[0].length;
-
   for (var i = 0; i < column; i++) {
     for (var j = 0; j < row; j++) {
-            var cellId = i * row + j;
-        var nonogramCell = document.getElementById(cellId);
-        if (nonogramCell.classList.contains("left")) {
-          nonogramCell.classList.remove("left");
-          nonogramCell.style.removeProperty("background");
-        }
-        if (nonogramCell.classList.contains("right")) {
-          nonogramCell.classList.remove("right");
-          nonogramCell.classList.remove("background")
-          }
+      var cellId = i * row + j;
+      var nonogramCell = document.getElementById(cellId);
+      if (nonogramCell.classList.contains("left")) {
+        nonogramCell.classList.remove("left");
+        nonogramCell.style.removeProperty("background");
+      }
+      if (nonogramCell.classList.contains("right")) {
+        nonogramCell.classList.remove("right");
+        nonogramCell.classList.remove("background");
+      }
     }
   }
-}
+ }
 
-// Запускаем следующую игру 
+// Запускаем следующую игру
 endButton.addEventListener("click", newGame);
 
 function newGame() {
@@ -482,13 +493,59 @@ function newGame() {
   }
   reStartGame();
   showHint();
+  timeSign.style.display = "flex";
   nonogramContainer.style.display = "grid";
   nonogramContainerFinish.style.display = "none";
   endGame.style.display = "none";
 }
 
+// Запускаем таймер
+const playButton = timeSign;
 
+function timerStart() {
+    if (!firstClick) {
+        firstClick = true;
+        timerOnButtonStart()
+    }
+}
 
+function timerOnButtonStart() {
+       if (!gamePlaying) {
+          gamePlaying = true;
+          playButton.classList.remove("play");
+          playButton.classList.add("pause");
+          intervalId = setInterval(() => {
+              currentTime++;
+              time.innerHTML = getTime(currentTime);
+          }, 200);
+      } else {
+          pauseTimer();
+      }
+  }
+
+nonogramHintCell20.addEventListener("mousedown", timerStart);
+playButton.addEventListener("click", timerOnButtonStart);
+
+function pauseTimer() {
+  clearInterval(intervalId);
+  playButton.classList.remove("pause");
+  playButton.classList.add("play");
+  gamePlaying = false;
+}
+
+function resetTimer() {
+  gamePlaying = false;
+  currentTime = 0;
+  time.innerHTML = "00 : 00";
+}
+
+function getTime(duration) {
+  const minutes = Math.floor((duration % 3600) / 60);
+  const seconds = Math.floor(duration % 60);
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(seconds).padStart(2, '0');
+  return `${formattedMinutes} : ${formattedSeconds}`;
+}
 
 
 
