@@ -40,11 +40,6 @@ const matrixes = [
 var currentLevel = 0;
 var matrix = matrixes[currentLevel];
 
-let firstHints = [];
-let secondHints = [];
-
-showHint();
-
 var hintNum;
 
 // Создаем элементы DOM
@@ -78,14 +73,6 @@ for (var i = 0; i < 20; i++) {
     var hintNum2 = document.createElement("p");
     hintNum2.className = "hint__number2--" + i;
     nonogramHintCell.appendChild(hintNum2);
-
-    if (i < firstHints.length) {
-      hintNum2.innerHTML = firstHints[i] === 0 ? "" : firstHints[i];
-    }
-
-    if (i < secondHints.length) {
-      hintNum.innerHTML = secondHints[i] === 0 ? "" : secondHints[i];
-    }
   }
 }
 
@@ -284,8 +271,28 @@ function toggleBox(nonogramCell) {
   }
 }
 
+
+// Заполняем слоты подсказками
+function fillHint(firstHints, secondHints) {
+  for (var i = 0; i < 10; i++) {
+    var hintNum = document.querySelector(".hint__number--" + i);
+    var hintNum2 = document.querySelector(".hint__number2--" + i);
+    if (i < firstHints.length) {
+      hintNum2.innerHTML = firstHints[i] === 0 ? "" : firstHints[i];
+    }
+  
+    if (i < secondHints.length) {
+      hintNum.innerHTML = secondHints[i] === 0 ? "" : secondHints[i];
+    }
+  }
+}
+
+
 // Отображаем подсказки
 function showHint() {
+let firstHints = [];
+let secondHints = [];
+
   var column = matrix.length;
   var row = matrix[0].length;
 
@@ -342,11 +349,13 @@ function showHint() {
         }
       }
     }
-
     firstHints.push(firstHint);
     secondHints.push(secondHint);
   }
+  fillHint(firstHints, secondHints)
 }
+
+showHint();
 
 // Вводим дополнительные цвета
 function addColorsToMatrix(cell) {
@@ -437,10 +446,11 @@ function reStartGame() {
         var nonogramCell = document.getElementById(cellId);
         if (nonogramCell.classList.contains("left")) {
           nonogramCell.classList.remove("left");
-          nonogramCell.style.background = "none";
+          nonogramCell.style.removeProperty("background");
         }
         if (nonogramCell.classList.contains("right")) {
           nonogramCell.classList.remove("right");
+          nonogramCell.classList.remove("background")
           }
     }
   }
@@ -451,13 +461,12 @@ endButton.addEventListener("click", newGame);
 
 function newGame() {
   currentLevel++;
-  console.log(currentLevel);
   if (currentLevel < matrixes.length) {
     matrix = matrixes[currentLevel];
   }
   reStartGame();
   showHint();
-  nonogramContainer.style.display = "block";
+  nonogramContainer.style.display = "grid";
   nonogramContainerFinish.style.display = "none";
   endGame.style.display = "none";
 }
