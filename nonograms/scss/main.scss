@@ -4,7 +4,7 @@ $grey-color: #c0c4cc;
 $green-color: #d9fe95;
 $opacity-level: 0.5;
 
-@import "/nonograms/node_modules/normalize.css/normalize.css";
+@import "./normalize.css";
 @import "./nonogram.scss";
 @import "./menu.scss";
 
