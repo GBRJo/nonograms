@@ -241,12 +241,12 @@ bodyElement1.appendChild(leftElementButtons);
 
 var saveButton = document.createElement("button");
 saveButton.className = "button__save";
-saveButton.innerHTML = '<img src="./assets/save.svg">';
+saveButton.innerHTML = '<p>Save</p>';
 leftElementButtons.appendChild(saveButton);
 
 var lookSolutionButton = document.createElement("button");
 lookSolutionButton.className = "button__looksolution";
-lookSolutionButton.innerHTML = '<img src="./assets/look__solution.svg">';
+lookSolutionButton.innerHTML = '<p>Hint</p>';
 leftElementButtons.appendChild(lookSolutionButton);
 
 var loadButton = document.createElement("button");

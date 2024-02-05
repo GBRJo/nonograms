@@ -128,10 +128,9 @@ $opacity-level: 0.5;
 
 .buttons__left {
 position: absolute;
-right: 160px;
+right: 80px;
 bottom: 88px;
 display: flex;
-flex-direction: column;
 gap: 12px;
 }
 
@@ -159,11 +158,9 @@ button {
   }
   &.button__save,
   &.button__looksolution {
-    padding: 8px;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-  }
+    padding: 4px 8px;
+    box-shadow: 0 1px 0 0 $grey-color;
+    }
   &:hover,
   &:active {
     box-shadow: 0 0 0 1px $black-color;

@@ -310,10 +310,9 @@
 
 .buttons__left {
   position: absolute;
-  right: 160px;
+  right: 80px;
   bottom: 88px;
   display: flex;
-  flex-direction: column;
   gap: 12px;
 }
 
@@ -339,10 +338,8 @@ button.button__reset, button.button__shaffle, button.button__load {
   height: 40px;
 }
 button.button__save, button.button__looksolution {
-  padding: 8px;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  padding: 4px 8px;
+  box-shadow: 0 1px 0 0 #c0c4cc;
 }
 button:hover, button:active {
   box-shadow: 0 0 0 1px #484848;
