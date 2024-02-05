@@ -81,6 +81,7 @@ p {
   display: flex;
   align-items: center;
   padding: 40px 40px 56px 40px;
+  position: relative;
 }
 
 .body__element2 {
@@ -117,4 +118,8 @@ span {
       align-items: center;
     justify-content: center;
   }
+
+  .buttons__left {
+       right: 88px;
+        }
 }

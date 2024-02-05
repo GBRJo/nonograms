@@ -227,7 +227,6 @@
 .fields__change--6:hover,
 .fields__change--6:active {
   box-shadow: 0 0 0 1px #484848;
-  outline: none;
 }
 
 .field__size {
@@ -309,6 +308,15 @@
   flex-direction: column;
 }
 
+.buttons__left {
+  position: absolute;
+  right: 160px;
+  bottom: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 button {
   border: none;
   box-shadow: 0 0 0 1px #c0c4cc;
@@ -325,12 +333,18 @@ button.button__end {
   margin-top: 12px;
   align-self: stretch;
 }
-button.button__reset, button.button__shaffle {
+button.button__reset, button.button__shaffle, button.button__load {
   padding: 12px;
   width: 40px;
   height: 40px;
 }
-button:hover {
+button.button__save, button.button__looksolution {
+  padding: 8px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+button:hover, button:active {
   box-shadow: 0 0 0 1px #484848;
 }
 
@@ -408,6 +422,7 @@ p {
   display: flex;
   align-items: center;
   padding: 40px 40px 56px 40px;
+  position: relative;
 }
 
 .body__element2 {
@@ -438,5 +453,8 @@ span.dynamic-part {
     margin: 0 auto;
     align-items: center;
     justify-content: center;
+  }
+  .buttons__left {
+    right: 88px;
   }
 }/*# sourceMappingURL=main.css.map */

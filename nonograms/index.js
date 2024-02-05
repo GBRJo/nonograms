@@ -227,13 +227,32 @@ for (var i = 0; i < 5; i++) {
 
 var resetButton = document.createElement("button");
 resetButton.className = "button__reset";
-resetButton.innerHTML = '<img src="./assets/restart.svg" />';
+resetButton.innerHTML = '<img src="./assets/restart.svg">';
 fields.appendChild(resetButton);
 
 var shaffleButton = document.createElement("button");
 shaffleButton.className = "button__shaffle";
-shaffleButton.innerHTML = '<img src="./assets/shaffl.svg" />';
+shaffleButton.innerHTML = '<img src="./assets/shaffl.svg">';
 fields.appendChild(shaffleButton);
+
+var leftElementButtons = document.createElement("div");
+leftElementButtons.className = "buttons__left";
+bodyElement1.appendChild(leftElementButtons);
+
+var saveButton = document.createElement("button");
+saveButton.className = "button__save";
+saveButton.innerHTML = '<img src="./assets/save.svg">';
+leftElementButtons.appendChild(saveButton);
+
+var lookSolutionButton = document.createElement("button");
+lookSolutionButton.className = "button__looksolution";
+lookSolutionButton.innerHTML = '<img src="./assets/look__solution.svg">';
+leftElementButtons.appendChild(lookSolutionButton);
+
+var loadButton = document.createElement("button");
+loadButton.className = "button__load";
+loadButton.innerHTML = '<img src="./assets/load.svg">';
+fields.appendChild(loadButton);
 
 var fieldInfo = document.createElement("div");
 fieldInfo.className = "field__info";
@@ -624,3 +643,66 @@ function shaffleGame() {
   nonogramContainerFinish.style.display = "none";
   endGame.style.display = "none";
 }
+
+// сохраняем игру в локальное хранилище и загружаем
+saveButton.addEventListener("click", saveGame);
+
+function saveGame() {
+  localStorage.setItem('currentTime', JSON.stringify(currentTime));
+
+  var column = matrix.length;
+  var row = matrix[0].length;
+  var leftArray = [];
+  var rightArray = [];
+
+  for (var i = 0; i < column; i++) {
+    for (var j = 0; j < row; j++) {
+      var cellId = i * row + j;
+      var nonogramCell = document.getElementById(cellId);
+
+      if (nonogramCell.classList.contains("left")) {
+        leftArray.push(cellId);
+      }
+      if (nonogramCell.classList.contains("right")) {
+        rightArray.push(cellId);
+      }
+    }
+  }
+
+  localStorage.setItem('left', JSON.stringify(leftArray));
+  localStorage.setItem('right', JSON.stringify(rightArray));
+}
+
+
+loadButton.addEventListener("click", loadGame);
+
+function loadGame() {
+  reStartGame();
+  savedTime = JSON.parse(localStorage.getItem('currentTime'));
+  time.innerHTML = getTime(savedTime);
+
+  var column = matrix.length;
+  var row = matrix[0].length;
+  for (var i = 0; i < column; i++) {
+    for (var j = 0; j < row; j++) {
+      var cellId = i * row + j;
+      var nonogramCell = document.getElementById(cellId);
+
+      var left = JSON.parse(localStorage.getItem('left'));
+      for (var k = 0; k < left.length; k++) {
+        if (cellId === left[k]) {
+          addColorsToMatrix(nonogramCell)
+          toggleBox(nonogramCell) ;
+        }
+      }
+
+      var right = JSON.parse(localStorage.getItem('right'));
+      for (var l = 0; l < right.length; l++) {
+        if (cellId === right[l]) {
+          nonogramCell.classList.toggle("right");
+        }
+      }
+    }
+  }
+}
+

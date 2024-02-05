@@ -37,12 +37,11 @@ $opacity-level: 0.5;
   width: 40px;
   height: 40px;
   transition: box-shadow 0.2s ease;
-
   &:hover,
   &:active {
     box-shadow: 0 0 0 1px $black-color;
-    outline: none;
   }
+
 }
 
 .field__size {
@@ -127,6 +126,15 @@ $opacity-level: 0.5;
   flex-direction: column;
 }
 
+.buttons__left {
+position: absolute;
+right: 160px;
+bottom: 88px;
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
 button {
   border: none;
   box-shadow: 0 0 0 1px $grey-color;
@@ -143,12 +151,21 @@ button {
     align-self: stretch;
   }
   &.button__reset,
-  &.button__shaffle {
+  &.button__shaffle,
+  &.button__load {
     padding: 12px;
     width: 40px;
     height: 40px;
   }
-  &:hover {
+  &.button__save,
+  &.button__looksolution {
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+  }
+  &:hover,
+  &:active {
     box-shadow: 0 0 0 1px $black-color;
   }
 }
