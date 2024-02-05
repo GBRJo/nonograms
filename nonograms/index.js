@@ -52,8 +52,8 @@ let templateNames = {
   0: "duck",
   1: "car",
   2: "s-man",
-  3: "SUP",
-  4: "rrr",
+  3: "spot",
+  4: "stairs",
 };
 
 // Создаем элементы DOM
@@ -167,7 +167,7 @@ timeTopContent.appendChild(timesText);
 
 for (let i = 1; i <= 5; i++) {
   var timeText = document.createElement("h4");
-  timeText.innerHTML = [i] + "<span class='dynamic-part'> - - - </span>";
+  timeText.innerHTML = [i] + "<span class='dynamic-part'>  - no results yet </span>";
   timeText.className = "time__text--" + i;
   timesText.appendChild(timeText);
 }
@@ -494,7 +494,7 @@ function timeToTop(timeTop) {
 
     if (timeTextElement) {
       timeTextElement.textContent =
-        " - " + timeTop[i].template + " (5X5) - " + getTime(timeTop[i].time);
+        " - " + timeTop[i].template + " 5x5 - " + getTime(timeTop[i].time);
     }
   }
 }
