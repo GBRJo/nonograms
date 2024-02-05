@@ -51,7 +51,7 @@ let timeTop = [];
 let templateNames = {
   0: "duck",
   1: "dot",
-  2: "SUPMAN",
+  2: "SUPERMAN",
   3: "SUP",
   4: "rrr"
 };
@@ -214,7 +214,25 @@ for (var i = 0; i < 5; i++) {
   var field = document.createElement("img");
   field.className = "fields__change--" + i;
   field.src = fieldArray[i];
+  field.addEventListener("click", (function(index) {
+    return function() {
+      chooseMatrix(index);
+    };
+  })(i));
   fields.appendChild(field);
+}
+
+function chooseMatrix(index) {
+   currentLevel = index;
+  if (currentLevel < matrixes.length) {
+    matrix = matrixes[currentLevel];
+  }
+  reStartGame();
+  showHint();
+  timeSign.style.display = "flex";
+  nonogramContainer.style.display = "grid";
+  nonogramContainerFinish.style.display = "none";
+  endGame.style.display = "none";
 }
 
 var resetButton = document.createElement("button");
