@@ -53,7 +53,7 @@ let templateNames = {
   1: "dot",
   2: "SUPERMAN",
   3: "SUP",
-  4: "rrr"
+  4: "rrr",
 };
 
 // Создаем элементы DOM
@@ -214,25 +214,15 @@ for (var i = 0; i < 5; i++) {
   var field = document.createElement("img");
   field.className = "fields__change--" + i;
   field.src = fieldArray[i];
-  field.addEventListener("click", (function(index) {
-    return function() {
-      chooseMatrix(index);
-    };
-  })(i));
+  field.addEventListener(
+    "click",
+    (function (index) {
+      return function () {
+        chooseMatrix(index);
+      };
+    })(i)
+  );
   fields.appendChild(field);
-}
-
-function chooseMatrix(index) {
-   currentLevel = index;
-  if (currentLevel < matrixes.length) {
-    matrix = matrixes[currentLevel];
-  }
-  reStartGame();
-  showHint();
-  timeSign.style.display = "flex";
-  nonogramContainer.style.display = "grid";
-  nonogramContainerFinish.style.display = "none";
-  endGame.style.display = "none";
 }
 
 var resetButton = document.createElement("button");
@@ -470,13 +460,13 @@ function checkGameEnd(matrix) {
 
   if (gameEnded) {
     let templateInfo = {
-    time: currentTime,
-    template: templateNames[currentLevel]
-  };
-  timeTop.push(templateInfo);
-  timeToTop(timeTop);
+      time: currentTime,
+      template: templateNames[currentLevel],
+    };
+    timeTop.push(templateInfo);
+    timeToTop(timeTop);
     timeSign.style.display = "none";
-    pauseTimer()
+    pauseTimer();
     setTimeout(() => {
       firstClick = false;
       audioWin.play();
@@ -489,22 +479,23 @@ function checkGameEnd(matrix) {
   }
 }
 
+//Выводим данные в топ лист
 function timeToTop(timeTop) {
-  timeTop.sort(function(a, b) {
+  timeTop.sort(function (a, b) {
     return a.time - b.time;
   });
 
   for (let i = 0; i < timeTop.length && i < 5; i++) {
-    var timeTextElement = document.querySelector(".time__text--" + (i + 1) + " .dynamic-part");
+    var timeTextElement = document.querySelector(
+      ".time__text--" + (i + 1) + " .dynamic-part"
+    );
 
     if (timeTextElement) {
-      timeTextElement.textContent = " - " + timeTop[i].template + " (5X5) - " + getTime(timeTop[i].time);
+      timeTextElement.textContent =
+        " - " + timeTop[i].template + " (5X5) - " + getTime(timeTop[i].time);
     }
   }
 }
-
-
-
 
 // Сброс игры
 resetButton.addEventListener("click", reStartGame);
@@ -531,7 +522,7 @@ function reStartGame() {
       }
     }
   }
- }
+}
 
 // Запускаем следующую игру
 endButton.addEventListener("click", newGame);
@@ -553,25 +544,25 @@ function newGame() {
 const playButton = timeSign;
 
 function timerStart() {
-    if (!firstClick) {
-        firstClick = true;
-        timerOnButtonStart()
-    }
+  if (!firstClick) {
+    firstClick = true;
+    timerOnButtonStart();
+  }
 }
 
 function timerOnButtonStart() {
-       if (!gamePlaying) {
-          gamePlaying = true;
-          playButton.classList.remove("play");
-          playButton.classList.add("pause");
-          intervalId = setInterval(() => {
-              currentTime++;
-              time.innerHTML = getTime(currentTime);
-          }, 200);
-      } else {
-          pauseTimer();
-      }
+  if (!gamePlaying) {
+    gamePlaying = true;
+    playButton.classList.remove("play");
+    playButton.classList.add("pause");
+    intervalId = setInterval(() => {
+      currentTime++;
+      time.innerHTML = getTime(currentTime);
+    }, 200);
+  } else {
+    pauseTimer();
   }
+}
 
 nonogramHintCell20.addEventListener("mousedown", timerStart);
 playButton.addEventListener("click", timerOnButtonStart);
@@ -593,13 +584,44 @@ function resetTimer() {
 function getTime(duration) {
   const minutes = Math.floor((duration % 3600) / 60);
   const seconds = Math.floor(duration % 60);
-  const formattedMinutes = String(minutes).padStart(2, '0');
-  const formattedSeconds = String(seconds).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
   return `${formattedMinutes} : ${formattedSeconds}`;
 }
 
+//Выбор матрицы вручную
+function chooseMatrix(index) {
+  currentLevel = index;
+  if (currentLevel < matrixes.length) {
+    matrix = matrixes[currentLevel];
+  }
+  reStartGame();
+  showHint();
+  timeSign.style.display = "flex";
+  nonogramContainer.style.display = "grid";
+  nonogramContainerFinish.style.display = "none";
+  endGame.style.display = "none";
+}
 
+//Выбор шаблона случайным образом
+shaffleButton.addEventListener("click", shaffleGame);
 
+function shaffleGame() {
+  var previousLevel = currentLevel;
+  do {
+    currentLevel = Math.floor(Math.random() * 5);
+  } while (currentLevel === previousLevel);
+  if (currentLevel < matrixes.length) {
+    matrix = matrixes[currentLevel];
+  }
+  console.log(currentLevel);
+  reStartGame();
+  showHint();
+  timeSign.style.display = "flex";
+  nonogramContainer.style.display = "grid";
+  nonogramContainerFinish.style.display = "none";
+  endGame.style.display = "none";
+}
 
 document.addEventListener("keydown", function () {
   function showSolution() {
