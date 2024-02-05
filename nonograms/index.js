@@ -649,7 +649,7 @@ saveButton.addEventListener("click", saveGame);
 
 function saveGame() {
   localStorage.setItem('currentTime', JSON.stringify(currentTime));
-
+  localStorage.setItem('currentLevel', JSON.stringify(currentLevel));
   var column = matrix.length;
   var row = matrix[0].length;
   var leftArray = [];
@@ -677,7 +677,11 @@ function saveGame() {
 loadButton.addEventListener("click", loadGame);
 
 function loadGame() {
+  currentLevel = JSON.parse(localStorage.getItem('currentLevel'));
+  matrix = matrixes[currentLevel];
   reStartGame();
+  showHint();
+
   savedTime = JSON.parse(localStorage.getItem('currentTime'));
   time.innerHTML = getTime(savedTime);
 
@@ -706,3 +710,9 @@ function loadGame() {
   }
 }
 
+// подсмотреть решение
+lookSolutionButton.addEventListener("click", lookSolution);
+
+function lookSolution() {
+
+}
