@@ -46,6 +46,15 @@ let currentTime = 0;
 let gamePlaying = false;
 let firstClick = false;
 
+let timeTop = [];
+
+let templateNames = {
+  0: "duck",
+  1: "dot",
+  2: "SUPMAN",
+  3: "SUP",
+  4: "rrr"
+};
 
 // Создаем элементы DOM
 var bodyElement1 = document.createElement("div");
@@ -152,14 +161,14 @@ timeTopContentHeader.className = "timeTop__Content--header";
 timeTopContentHeader.innerHTML = "Time top:";
 timeTopContent.appendChild(timeTopContentHeader);
 
-var timesText = document.createElement("h3");
+var timesText = document.createElement("div");
 timesText.className = "times__text";
 timeTopContent.appendChild(timesText);
 
 for (let i = 1; i <= 5; i++) {
   var timeText = document.createElement("h4");
-  timeText.innerHTML = [i] + "  place  - - - 09 : 00";
-  timeText.className = "time__text--" + [i];
+  timeText.innerHTML = [i] + "<span class='dynamic-part'> - - - </span>";
+  timeText.className = "time__text--" + i;
   timesText.appendChild(timeText);
 }
 
@@ -442,6 +451,12 @@ function checkGameEnd(matrix) {
   }
 
   if (gameEnded) {
+    let templateInfo = {
+    time: currentTime,
+    template: templateNames[currentLevel]
+  };
+  timeTop.push(templateInfo);
+  timeToTop(timeTop);
     timeSign.style.display = "none";
     pauseTimer()
     setTimeout(() => {
@@ -455,6 +470,23 @@ function checkGameEnd(matrix) {
     }, 1000);
   }
 }
+
+function timeToTop(timeTop) {
+  timeTop.sort(function(a, b) {
+    return a.time - b.time;
+  });
+
+  for (let i = 0; i < timeTop.length && i < 5; i++) {
+    var timeTextElement = document.querySelector(".time__text--" + (i + 1) + " .dynamic-part");
+
+    if (timeTextElement) {
+      timeTextElement.textContent = " - " + timeTop[i].template + " (5X5) - " + getTime(timeTop[i].time);
+    }
+  }
+}
+
+
+
 
 // Сброс игры
 resetButton.addEventListener("click", reStartGame);
@@ -527,6 +559,7 @@ nonogramHintCell20.addEventListener("mousedown", timerStart);
 playButton.addEventListener("click", timerOnButtonStart);
 
 function pauseTimer() {
+  firstClick = false;
   clearInterval(intervalId);
   playButton.classList.remove("pause");
   playButton.classList.add("play");
