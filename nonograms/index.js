@@ -1,25 +1,25 @@
 // Игровые поля
 const matrixes = [
   [
-    [1, 0, 0, 0, 0],
-    [2, 3, 0, 3, 0],
-    [2, 3, 3, 3, 2],
-    [2, 3, 3, 3, 0],
-    [2, 1, 1, 1, 0],
+    [1, 2, 2, 2, 0],
+    [1, 3, 0, 3, 0],
+    [0, 3, 3, 3, 2],
+    [2, 1, 3, 1, 0],
+    [2, 1, 1, 1, 1],
   ],
   [
-    [0, 4, 4, 4, 0],
-    [0, 0, 0, 0, 0],
-    [4, 0, 0, 5, 5],
-    [0, 0, 0, 0, 5],
-    [6, 0, 7, 0, 0],
+    [4, 5, 0, 5, 5],
+    [7, 5, 6, 5, 5],
+    [7, 5, 5, 5, 5],
+    [0, 0, 5, 0, 5],
+    [0, 0, 5, 0, 0],
   ],
   [
-    [8, 9, 9, 9, 10],
-    [8, 10, 10, 10, 11],
-    [8, 10, 10, 8, 10],
-    [11, 10, 8, 8, 10],
-    [10, 0, 0, 0, 8],
+    [11, 11, 0, 0, 9],
+    [10, 10, 9, 9, 11],
+    [10, 10, 9, 11, 9],
+    [8, 10, 11, 9, 11],
+    [11, 11, 0, 0, 0],
   ],
   [
     [0, 0, 0, 0, 0],
@@ -29,11 +29,11 @@ const matrixes = [
     [0, 0, 0, 14, 14],
   ],
   [
-    [15, 15, 15, 15, 15],
-    [15, 15, 15, 15, 15],
-    [0, 0, 0, 0, 0],
-    [16, 16, 16, 16, 16],
-    [16, 16, 16, 16, 16],
+    [16, 17, 17, 17, 15],
+    [16, 15, 15, 15, 17],
+    [16, 15, 15, 16, 15],
+    [17, 15, 16, 16, 15],
+    [15, 0, 0, 0, 16],
   ],
 ];
 
@@ -50,8 +50,8 @@ let timeTop = [];
 
 let templateNames = {
   0: "duck",
-  1: "dot",
-  2: "SUPERMAN",
+  1: "car",
+  2: "s-man",
   3: "SUP",
   4: "rrr",
 };
@@ -415,6 +415,8 @@ function addColorsToMatrix(cell) {
       cell.style.background = "url(./assets/box__15--navy.svg)";
     } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 16) {
       cell.style.background = "url(./assets/box__16--red.svg)";
+    } else if (matrix[Math.floor(cellIndex / 5)][cellIndex % 5] === 17) {
+      cell.style.background = "url(./assets/box__17--blue.svg)";
     }
   }
 }
@@ -422,11 +424,11 @@ function addColorsToMatrix(cell) {
 // Добавляем финалы для каждого шаблона
 function addFinals(currentLevel) {
   var finalArray = [
-    "./assets/final__1.svg",
-    "./assets/final__2.svg",
-    "./assets/final__3.svg",
+    "./assets/final__1.gif",
+    "./assets/final__2.gif",
+    "./assets/final__3.gif",
     "./assets/final__4.svg",
-    "./assets/final__5.svg",
+    "./assets/final__5.gif",
   ];
   var nonogramContainerFinish = document.querySelector(
     ".nonogram__container--finish"
@@ -622,26 +624,3 @@ function shaffleGame() {
   nonogramContainerFinish.style.display = "none";
   endGame.style.display = "none";
 }
-
-document.addEventListener("keydown", function () {
-  function showSolution() {
-    var column = matrix.length;
-    var row = matrix[0].length;
-
-    for (var i = 0; i < column; i++) {
-      for (var j = 0; j < row; j++) {
-        if (matrix[i][j] !== 0) {
-          var cellId = "nonogram__cell--" + (i * row + j);
-          var nonogramCell = document.getElementById(cellId);
-          addColorsToMatrix(cell);
-        } else {
-          nonogramCell.classList.toggle("right");
-        }
-      }
-    }
-  }
-
-  showSolution();
-});
-
-// Отображаем неактуальные подсказки

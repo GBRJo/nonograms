@@ -1,27 +1,27 @@
 <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="48" height="48" fill="#311963"/>
-<rect x="48" width="48" height="48" fill="#311963"/>
-<rect x="96" width="48" height="48" fill="#311963"/>
-<rect x="144" width="48" height="48" fill="#311963"/>
+<rect width="48" height="48" fill="#FA3263"/>
+<rect x="48" width="48" height="48" fill="#00B0C8"/>
+<rect x="96" width="48" height="48" fill="#00B0C8"/>
+<rect x="144" width="48" height="48" fill="#00B0C8"/>
 <rect x="192" width="48" height="48" fill="#311963"/>
-<rect y="48" width="48" height="48" fill="#311963"/>
+<rect y="48" width="48" height="48" fill="#FA3263"/>
 <rect x="48" y="48" width="48" height="48" fill="#311963"/>
 <rect x="96" y="48" width="48" height="48" fill="#311963"/>
 <rect x="144" y="48" width="48" height="48" fill="#311963"/>
-<rect x="192" y="48" width="48" height="48" fill="#311963"/>
-<rect y="96" width="48" height="48" fill="#F2F2F2"/>
-<rect x="48" y="96" width="48" height="48" fill="#F2F2F2"/>
-<rect x="96" y="96" width="48" height="48" fill="#F2F2F2"/>
-<rect x="144" y="96" width="48" height="48" fill="#F2F2F2"/>
-<rect x="192" y="96" width="48" height="48" fill="#F2F2F2"/>
-<rect y="144" width="48" height="48" fill="#FA3263"/>
-<rect x="48" y="144" width="48" height="48" fill="#FA3263"/>
+<rect x="192" y="48" width="48" height="48" fill="#00B0C8"/>
+<rect y="96" width="48" height="48" fill="#FA3263"/>
+<rect x="48" y="96" width="48" height="48" fill="#311963"/>
+<rect x="96" y="96" width="48" height="48" fill="#311963"/>
+<rect x="144" y="96" width="48" height="48" fill="#FA3263"/>
+<rect x="192" y="96" width="48" height="48" fill="#311963"/>
+<rect y="144" width="48" height="48" fill="#00B0C8"/>
+<rect x="48" y="144" width="48" height="48" fill="#311963"/>
 <rect x="96" y="144" width="48" height="48" fill="#FA3263"/>
 <rect x="144" y="144" width="48" height="48" fill="#FA3263"/>
-<rect x="192" y="144" width="48" height="48" fill="#FA3263"/>
-<rect y="192" width="48" height="48" fill="#FA3263"/>
-<rect x="48" y="192" width="48" height="48" fill="#FA3263"/>
-<rect x="96" y="192" width="48" height="48" fill="#FA3263"/>
-<rect x="144" y="192" width="48" height="48" fill="#FA3263"/>
+<rect x="192" y="144" width="48" height="48" fill="#311963"/>
+<rect y="192" width="48" height="48" fill="#311963"/>
+<rect x="48" y="192" width="48" height="48" fill="#F2F2F2"/>
+<rect x="96" y="192" width="48" height="48" fill="#F2F2F2"/>
+<rect x="144" y="192" width="48" height="48" fill="#F2F2F2"/>
 <rect x="192" y="192" width="48" height="48" fill="#FA3263"/>
 </svg>

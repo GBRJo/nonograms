@@ -5,9 +5,7 @@ $green-color: #d9fe95;
 $opacity-level: 0.5;
 
 .menu__container {
-  padding-left: 24px;
-  padding-right: 24px;
-  max-width: 320px;
+  max-width: 400px;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -38,8 +36,12 @@ $opacity-level: 0.5;
   box-shadow: 0 0 0 1px $grey-color;
   width: 40px;
   height: 40px;
-  &:hover {
+  transition: box-shadow 0.2s ease;
+
+  &:hover,
+  &:active {
     box-shadow: 0 0 0 1px $black-color;
+    outline: none;
   }
 }
 

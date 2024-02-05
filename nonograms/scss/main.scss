@@ -8,12 +8,6 @@ $opacity-level: 0.5;
 @import "./nonogram.scss";
 @import "./menu.scss";
 
-$white-color: #f2f2f2;
-$black-color: #484848;
-$grey-color: #c0c4cc;
-$green-color: #d9fe95;
-
-
 body {
   height: 100vh;
   grid-template-rows: 1fr;
@@ -86,7 +80,11 @@ p {
 .body__element1 {
   display: flex;
   align-items: center;
-  padding-bottom: 40px;
+  padding: 40px 40px 56px 40px;
+}
+
+.body__element2 {
+  padding: 0 40px;
 }
 
 span {
@@ -103,5 +101,22 @@ span {
     grid-template-areas:
       "main"
       "menu";
+  }
+
+  .body__element1 {
+   
+    padding: 40px 0px 56px 0px;
+  }
+
+  .nonogram__container--finish {
+    width: 100%;
+    max-width: 720px;
+   
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
