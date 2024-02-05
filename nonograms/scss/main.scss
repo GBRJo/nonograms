@@ -4,7 +4,7 @@ $grey-color: #c0c4cc;
 $green-color: #d9fe95;
 $opacity-level: 0.5;
 
-@import "../node_modules/normalize.css/normalize.css";
+@import "/nonograms/node_modules/normalize.css/normalize.css";
 @import "./nonogram.scss";
 @import "./menu.scss";
 
@@ -109,13 +109,12 @@ span {
   }
 
   .nonogram__container--finish {
-    width: 100%;
+       width: 100%;
     max-width: 720px;
     background-position: center center;
     background-repeat: no-repeat;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
+      align-items: center;
     justify-content: center;
   }
 }

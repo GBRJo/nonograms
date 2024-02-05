@@ -1,4 +1,4 @@
-@import "../node_modules/normalize.css/normalize.css";
+@import "/nonograms/node_modules/normalize.css/normalize.css";
 .nonogram__container {
   width: 432px;
   height: 432px;
@@ -436,7 +436,6 @@ span.dynamic-part {
     background-position: center center;
     background-repeat: no-repeat;
     margin: 0 auto;
-    display: flex;
     align-items: center;
     justify-content: center;
   }
