@@ -326,6 +326,16 @@ button.button__save, button.button__looksolution {
   padding: 4px 8px;
   box-shadow: 0 1px 0 0 #c0c4cc;
 }
+button.button__save:hover, button.button__looksolution:hover {
+  box-shadow: 0 1px 0 0 #484848;
+}
+button.button__looksolution:active {
+  box-shadow: 0 1px 0 0 #484848;
+  background-color: #c0c4cc;
+}
+button.button__save:active {
+  box-shadow: 0 1px 0 0 #484848;
+}
 button:hover, button:active {
   box-shadow: 0 0 0 1px #484848;
 }

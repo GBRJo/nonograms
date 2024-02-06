@@ -158,6 +158,22 @@ button {
     padding: 4px 8px;
     box-shadow: 0 1px 0 0 $grey-color;
     }
+
+  &.button__save:hover,
+  &.button__looksolution:hover{
+    box-shadow: 0 1px 0 0 $black-color;
+  }
+
+  &.button__looksolution:active{
+    box-shadow: 0 1px 0 0 $black-color;
+    background-color: $grey-color;
+    
+  }
+
+  &.button__save:active {
+    box-shadow: 0 1px 0 0 $black-color;
+  }
+
   &:hover,
   &:active {
     box-shadow: 0 0 0 1px $black-color;

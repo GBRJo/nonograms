@@ -529,6 +529,10 @@ resetButton.addEventListener("click", reStartGame);
 function reStartGame() {
   pauseTimer();
   resetTimer();
+  cleanField ();
+}
+
+function cleanField () {
   nonogramContainerFinish.style.display = "none";
   nonogramContainer.style.display = "grid";
   endGame.style.display = "none";
@@ -546,6 +550,7 @@ function reStartGame() {
         nonogramCell.classList.remove("right");
         nonogramCell.classList.remove("background");
       }
+      nonogramCell.style.removeProperty("background");
     }
   }
 }
@@ -719,11 +724,86 @@ function loadGame() {
 }
 
 // подсмотреть решение
-lookSolutionButton.addEventListener("click", lookSolution);
+
+function autoSave() {
+
+var autoData = {
+  leftArray: [],
+  rightArray: []
+};
+
+var column = matrix.length;
+var row = matrix[0].length;
+
+for (var i = 0; i < column; i++) {
+  for (var j = 0; j < row; j++) {
+    var cellId = i * row + j;
+    var nonogramCell = document.getElementById(cellId);
+
+    if (nonogramCell.classList.contains("left")) {
+      autoData.leftArray.push(cellId);
+    }
+    if (nonogramCell.classList.contains("right")) {
+      autoData.rightArray.push(cellId);
+    }
+  }
+}
+localStorage.setItem('autoSave', JSON.stringify(autoData));
+}
+
+function autoLoad() {
+  cleanField();
+  
+  var autoSaveData = JSON.parse(localStorage.getItem('autoSave'));
+
+  var left = autoSaveData.leftArray;
+  var right = autoSaveData.rightArray;
+
+  var column = matrix.length;
+  var row = matrix[0].length;
+
+  for (var i = 0; i < column; i++) {
+    for (var j = 0; j < row; j++) {
+      var cellId = i * row + j;
+      var nonogramCell = document.getElementById(cellId);
+      for (var k = 0; k < left.length; k++) {
+        if (cellId === left[k]) {
+          addColorsToMatrix(nonogramCell)
+          toggleBox(nonogramCell) ;
+        }
+      }
+      for (var l = 0; l < right.length; l++) {
+        if (cellId === right[l]) {
+          nonogramCell.classList.toggle("right");
+        }
+      }
+    }
+  }
+}
+
+
+lookSolutionButton.addEventListener("mousedown", lookSolution);
+lookSolutionButton.addEventListener("mouseup", hideSolution);
 
 function lookSolution() {
+  autoSave();
+  cleanField();
 
+  var column = matrix.length;
+  var row = matrix[0].length;
+  for (var i = 0; i < column; i++) {
+    for (var j = 0; j < row; j++) {
+      var cellId = i * row + j;
+      var cell = document.getElementById(cellId);
+      addColorsToMatrix(cell);
+    }
+  }
 }
+
+function hideSolution() {
+  autoLoad();
+}
+
 
 // удаляем и прибавляем активный класс к выбору уровней в меню
 function removeActiveClass() {
