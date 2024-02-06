@@ -20,31 +20,16 @@
   grid-template-columns: repeat(auto-fit, 40px);
 }
 
-.fields__change--0,
-.fields__change--1,
-.fields__change--2,
-.fields__change--3,
-.fields__change--4,
-.fields__change--5,
-.fields__change--6 {
+.fields__menu {
   box-shadow: 0 0 0 1px #c0c4cc;
   width: 40px;
   height: 40px;
   transition: box-shadow 0.2s ease;
 }
-.fields__change--0:hover, .fields__change--0:active,
-.fields__change--1:hover,
-.fields__change--1:active,
-.fields__change--2:hover,
-.fields__change--2:active,
-.fields__change--3:hover,
-.fields__change--3:active,
-.fields__change--4:hover,
-.fields__change--4:active,
-.fields__change--5:hover,
-.fields__change--5:active,
-.fields__change--6:hover,
-.fields__change--6:active {
+.fields__menu:hover {
+  box-shadow: 0 0 0 1px #484848;
+}
+.fields__menu.active {
   box-shadow: 0 0 0 1px #484848;
 }
 

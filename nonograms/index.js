@@ -212,16 +212,21 @@ var fieldArray = [
 
 for (var i = 0; i < 5; i++) {
   var field = document.createElement("img");
-  field.className = "fields__change--" + i;
+  field.className = "fields__menu fields__change--" + i;
   field.src = fieldArray[i];
-  field.addEventListener(
-    "click",
-    (function (index) {
-      return function () {
-        chooseMatrix(index);
-      };
-    })(i)
-  );
+  
+  if (i === currentLevel) {
+    field.classList.add("active");
+  }
+
+  field.addEventListener("click", function(index) {
+    return function() {
+      removeActiveClass();
+      addActiveClass(index);
+      chooseMatrix(index);
+    };
+  }(i));
+
   fields.appendChild(field);
 }
 
@@ -553,6 +558,8 @@ function newGame() {
   if (currentLevel < matrixes.length) {
     matrix = matrixes[currentLevel];
   }
+  removeActiveClass()
+  addActiveClass(currentLevel);
   reStartGame();
   showHint();
   timeSign.style.display = "flex";
@@ -635,7 +642,8 @@ function shaffleGame() {
   if (currentLevel < matrixes.length) {
     matrix = matrixes[currentLevel];
   }
-  console.log(currentLevel);
+  removeActiveClass()
+  addActiveClass(currentLevel);
   reStartGame();
   showHint();
   timeSign.style.display = "flex";
@@ -715,4 +723,19 @@ lookSolutionButton.addEventListener("click", lookSolution);
 
 function lookSolution() {
 
+}
+
+// удаляем и прибавляем активный класс к выбору уровней в меню
+function removeActiveClass() {
+  var fields = document.querySelectorAll(".fields__menu");
+  fields.forEach(function(field) {
+    field.classList.remove("active");
+  });
+}
+
+function addActiveClass(index) {
+  var fields = document.querySelectorAll(".fields__menu");
+  if (index >= 0 && index < fields.length && fields[index]) {
+    fields[index].classList.add("active");
+  }
 }
