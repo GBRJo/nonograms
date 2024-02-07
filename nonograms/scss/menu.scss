@@ -92,7 +92,7 @@ $opacity-level: 0.5;
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease;
-  background-color: transparent;
+  background-color:$white-color;
 
   &:hover {
     transform: scale(1.04);
@@ -145,7 +145,17 @@ button {
     letter-spacing: -0.225px;
     margin-top: 12px;
     align-self: stretch;
-  }
+  } 
+
+  &.light__button {
+    position: absolute;
+right: 72px;
+top: 80px;
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
   &.button__reset,
   &.button__shaffle,
   &.button__load {
@@ -155,6 +165,7 @@ button {
   }
   &.button__save,
   &.button__looksolution {
+    background-color: transparent;
     padding: 4px 8px;
     box-shadow: 0 1px 0 0 $grey-color;
     }

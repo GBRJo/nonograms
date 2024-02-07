@@ -16,7 +16,12 @@ body {
   font-family: "Roboto", sans-serif;
   display: grid;
   grid-template-columns: 4fr 2fr;
-  grid-template-areas: "main menu";
+  grid-template-areas: "main menu"; 
+}
+
+.dark__teme {
+  background-color: $black-color;
+  color: $white-color;
 }
 
 main {
@@ -67,7 +72,6 @@ letter-spacing: -0.225px;
 }
 
 p {
-  color: $black-color;
   margin: 0;
   font-family: Roboto;
   font-size: 12px;

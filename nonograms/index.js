@@ -249,6 +249,11 @@ saveButton.className = "button__save";
 saveButton.innerHTML = '<p>Save</p>';
 leftElementButtons.appendChild(saveButton);
 
+var lightButton = document.createElement("button");
+lightButton.className = "light__button";
+lightButton.innerHTML = '<img src="./assets/light.svg">';;
+bodyElement1.appendChild(lightButton);
+
 var lookSolutionButton = document.createElement("button");
 lookSolutionButton.className = "button__looksolution";
 lookSolutionButton.innerHTML = '<p>Hint</p>';
@@ -804,6 +809,12 @@ function hideSolution() {
   autoLoad();
 }
 
+//Переключаем темы
+lightButton.addEventListener("click", switchTeme);
+
+function switchTeme() {
+  document.body.classList.toggle("dark__teme");
+}
 
 // удаляем и прибавляем активный класс к выбору уровней в меню
 function removeActiveClass() {

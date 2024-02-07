@@ -265,7 +265,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease;
-  background-color: transparent;
+  background-color: #f2f2f2;
 }
 .play-button:hover {
   transform: scale(1.04);
@@ -317,12 +317,22 @@ button.button__end {
   margin-top: 12px;
   align-self: stretch;
 }
+button.light__button {
+  position: absolute;
+  right: 72px;
+  top: 80px;
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
 button.button__reset, button.button__shaffle, button.button__load {
   padding: 12px;
   width: 40px;
   height: 40px;
 }
 button.button__save, button.button__looksolution {
+  background-color: transparent;
   padding: 4px 8px;
   box-shadow: 0 1px 0 0 #c0c4cc;
 }
@@ -349,6 +359,11 @@ body {
   display: grid;
   grid-template-columns: 4fr 2fr;
   grid-template-areas: "main menu";
+}
+
+.dark__teme {
+  background-color: #484848;
+  color: #f2f2f2;
 }
 
 main {
@@ -400,7 +415,6 @@ h4 {
 }
 
 p {
-  color: #484848;
   margin: 0;
   font-family: Roboto;
   font-size: 12px;
