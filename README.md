@@ -6,8 +6,7 @@ This is a student project. It is a small interactive game, a variation of nonogr
 Try the game live [here](https://gbrjo.github.io/nonograms/nonograms/)!
 
 ### Preview
-
-![nono](https://github.com/GBRJo/nonograms/assets/137959889/c37f7e46-0698-4edf-b5ab-e7e010562185)
+![nono](https://github.com/GBRJo/nonograms/assets/137959889/c1a2f6ee-a64a-4a70-a9dd-02ebcd105fd0)
 
 ### How to Play
 
